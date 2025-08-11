@@ -1,0 +1,9 @@
+[TYPECHECK]
+ignored-modules=pygame
+ignored-classes=pygame
+
+[MESSAGES CONTROL]
+disable=no-member,invalid-name
+
+[BASIC]
+good-names=running,dt,i,x,y,id

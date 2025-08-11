@@ -1,0 +1,8 @@
+[flake8]
+max-line-length = 99
+ignore = W291,W293,E303
+per-file-ignores =
+    physics.py: E501
+    main.py: E501
+    ui.py: E501
+    objects.py: E501
