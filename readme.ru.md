@@ -1,20 +1,23 @@
-
 # PyGravitySimulator
 
+[![EN](https://img.shields.io/badge/EN-english-CC0000?logo=unitedkingdom&logoColor=white)](https://github.com/Ewerall/PyGravitySimulator/blob/main/README.md)
+
 Это интерактивная 2D симуляция гравитационного взаимодействия объектов с возможностью настройки параметров и визуализацией траекторий движения.
+
+![ezgif-6e618860b49857](https://github.com/user-attachments/assets/0e81918f-3970-4724-9d22-79e03b83e526)
 
 ##  Структура проекта
 ```
 PyGravitySimulator
-├── tests/            # Тесты 
-├── resources/        # Ресурсы проекта 
+├── tests/            # тесты 
+├── resources/        # ресурсы проекта 
 ├── main.py           # точка входа
 ├── objects.py        # класс Object (физические объекты)
-├── physics.py        # Физический движок
-├── config.py         # Конфигурационные константы (размеры экрана и т.д)
-├── ui.py             # Пользовательский интерфейс (поля ввода, сетка)
-├── utils.py          # Утилиты и вспомогательные функции (цвета, конвертация)
-├── README.md         # This file
+├── physics.py        # физический движок
+├── config.py         # конфигурационные константы (размеры экрана и т.д)
+├── ui.py             # пользовательский интерфейс (поля ввода, сетка)
+├── utils.py          # утилиты и вспомогательные функции (цвета, конвертация)
+└── README.md         # этот файл
 ```
 
 ### Установка и запуск
