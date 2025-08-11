@@ -5,8 +5,7 @@
 
 This is an interactive 2D simulation of gravitational interaction between objects with adjustable parameters.
 
-![ezgif-6e618860b49857](https://github.com/user-attachments/assets/0e81918f-3970-4724-9d22-79e03b83e526)
-
+![ezgif-100281a5d00cfe](https://github.com/user-attachments/assets/34153f5f-60a2-4bcf-8d8a-824f8e07d223)
 
 ## Project structure
 ```
