@@ -1,7 +1,11 @@
 
 # PyGravitySimulator
 
+[![RU](https://img.shields.io/badge/RU-русский-0066CC?logo=russia&logoColor=white)](https://github.com/Ewerall/PyGravitySimulator/blob/main/readme.ru.md)
+
 This is an interactive 2D simulation of gravitational interaction between objects with adjustable parameters.
+
+![ezgif-6e618860b49857](https://github.com/user-attachments/assets/0e81918f-3970-4724-9d22-79e03b83e526)
 
 
 ## Project structure
@@ -15,7 +19,7 @@ PyGravitySimulator
 ├── config.py         # Configuration constants (screen dimensions, etc.)
 ├── ui.py             # User interface (input fields, grid)
 ├── utils.py          # Utilities and helper functions (colors, conversions)
-├── README.md         # This file
+└── README.md         # This file
 ```
 
 ### Installation and Launch
