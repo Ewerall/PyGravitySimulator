@@ -13,6 +13,9 @@ Note: Forces (fx, fy) are calculated dynamically during simulation and not store
 """
 
 import uuid
+from typing import Optional, Tuple, List, Any
+
+import pygame
 from gravity_simulator.utils import random_color
 
 
@@ -36,15 +39,16 @@ class Object():
     
     Note: Forces are calculated dynamically during physics updates
     """
-    def __init__(self, x, y, mass, radius, **kwargs):
-        self.x = x
-        self.y = y
-        self.mass = mass
-        self.radius = radius
-        self.vx = kwargs.get('vx', 0)
-        self.vy = kwargs.get('vy', 0)
-        self.color = kwargs.get('color') or random_color()
-        self.active = True
-        self.id = uuid.uuid4()
-        self.trail = []
-        self.max_trail_length = kwargs.get('max_trail_length', 100)
+    def __init__(self, x: float, y: float, mass: float, radius: float, **kwargs: Any) -> None:
+        self.x: float = x
+        self.y: float = y
+        self.mass: float = mass
+        self.radius: float = radius
+        self.vx: float = kwargs.get('vx', 0)
+        self.vy: float = kwargs.get('vy', 0)
+        self.color: Tuple[int, int, int] = kwargs.get('color') or random_color()
+        self.active: bool = True
+        self.id: uuid.UUID = uuid.uuid4()
+        self.trail: List[Tuple[float, float]] = []
+        self.max_trail_length: int = kwargs.get('max_trail_length', 100)
+        self.base_image: Optional[pygame.Surface] = kwargs.get('base_image', None)

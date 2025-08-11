@@ -7,10 +7,13 @@ This module contains user interface elements including:
 """
 
 import math
+from typing import List, Tuple, Optional, Any
+
 import pygame
 
 
-def find_object_under_mouse(mouse_x, mouse_y, particles, detection_radius=20):
+def find_object_under_mouse(mouse_x: float, mouse_y: float, particles: List[Any],
+                            detection_radius: float = 20) -> Optional[Any]:
     """Find the particle under the mouse cursor.
     
     Args:
@@ -33,7 +36,8 @@ def find_object_under_mouse(mouse_x, mouse_y, particles, detection_radius=20):
     return None
 
 
-def draw_grid(screen, grid_size=50, grid_color=(50, 50, 50)):
+def draw_grid(screen: pygame.Surface, grid_size: int = 50,
+              grid_color: Tuple[int, int, int] = (50, 50, 50)) -> None:
     """Draw a grid on the screen"""
     width, height = screen.get_size()
 
@@ -47,7 +51,7 @@ def draw_grid(screen, grid_size=50, grid_color=(50, 50, 50)):
 class InputBox:
     """Input box widget for text input in pygame applications"""
 
-    def __init__(self, position, size, **kwargs):
+    def __init__(self, position: Tuple[int, int], size: Tuple[int, int], **kwargs: Any) -> None:
         """Create an input box for physics parameters
         
         Args:
@@ -61,15 +65,15 @@ class InputBox:
         x, y = position
         width, height = size
         self.rect = pygame.Rect(x, y, width, height)
-        self.text = kwargs.get('text', '')
-        self.font = kwargs.get('font', pygame.font.Font(None, 32))
-        self.color_active = pygame.Color(kwargs.get('color_active', 'green'))
-        self.color_inactive = pygame.Color(kwargs.get('color_inactive', 'white'))
-        self.active = False
-        self.color = self.color_inactive
-        self.txt_surface = self.font.render(self.text, True, self.color)
+        self.text: str = kwargs.get('text', '')
+        self.font: pygame.font.Font = kwargs.get('font', pygame.font.Font(None, 32))
+        self.color_active: pygame.Color = pygame.Color(kwargs.get('color_active', 'green'))
+        self.color_inactive: pygame.Color = pygame.Color(kwargs.get('color_inactive', 'white'))
+        self.active: bool = False
+        self.color: pygame.Color = self.color_inactive
+        self.txt_surface: pygame.Surface = self.font.render(self.text, True, self.color)
 
-    def handle_event(self, event):
+    def handle_event(self, event: pygame.event.Event) -> None:
         """Handle pygame events for the input box"""
         if event.type == pygame.MOUSEBUTTONDOWN:
             if self.rect.collidepoint(event.pos):
@@ -83,22 +87,23 @@ class InputBox:
                 if event.key == pygame.K_RETURN:
                     self.active = False
                     self.color = pygame.Color('white')
+                    self.update()
                 elif event.key == pygame.K_BACKSPACE:
                     self.text = self.text[:-1]
                 else:
                     self.text += event.unicode
                 self.txt_surface = self.font.render(self.text, True, self.color)
 
-    def update(self):
+    def update(self) -> None:
         """Update the input box dimensions based on text content"""
         width = max(100, self.txt_surface.get_width() + 10)
         self.rect.w = width
 
-    def draw(self, screen):
+    def draw(self, screen: pygame.Surface) -> None:
         """Draw the input box on the screen"""
         screen.blit(self.txt_surface, (self.rect.x + 5, self.rect.y + 5))
         pygame.draw.rect(screen, self.color, self.rect, 2)
 
-    def is_hovered(self, pos):
+    def is_hovered(self, pos: Tuple[int, int]) -> bool:
         """Check if the input box is hovered by mouse"""
         return self.rect.collidepoint(pos)

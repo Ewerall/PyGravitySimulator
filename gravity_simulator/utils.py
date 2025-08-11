@@ -5,18 +5,20 @@ This module provides essential helper functions for:
 - Safe conversion of user input to physical parameters
 - Data validation for physics simulation
 """
-
 import random
+from typing import Tuple
+
+import pygame
 
 
-def random_color():
+def random_color() -> Tuple[int, int, int]:
     """Generate a visually distinct RGB color for celestial objects"""
     return (random.randint(50, 255),
             random.randint(50, 255),
             random.randint(50, 255))
 
 
-def safe_float_convert(text, default, min_val, max_val):
+def safe_float_convert(text: str, default: float, min_val: float, max_val: float) -> float:
     """Safely convert user input to validated float within physical bounds
     
     Args:
@@ -41,3 +43,15 @@ def safe_float_convert(text, default, min_val, max_val):
         return max(min_val, min(max_val, value))
     except ValueError:
         return default
+
+
+def apply_color_tint(image: pygame.Surface, tint_color: Tuple[int, int, int]) -> pygame.Surface:
+    """Applies a color tint to the image while preserving transparency"""
+    tinted_image = image.copy()
+
+    tint_surface = pygame.Surface(image.get_size(), pygame.SRCALPHA)
+    tint_surface.fill(tint_color)
+
+    tinted_image.blit(tint_surface, (0, 0), special_flags=pygame.BLEND_RGB_MULT)
+
+    return tinted_image
