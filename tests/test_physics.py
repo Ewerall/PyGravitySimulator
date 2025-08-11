@@ -13,6 +13,7 @@ import pytest
 
 from gravity_simulator.physics import PhysicsEngine
 
+
 class MockParticle:
     """Mock object representing a celestial body for physics testing"""
 
@@ -25,6 +26,7 @@ class MockParticle:
         self.mass = mass
         self.radius = radius
         self.active = True
+
 
 class TestPhysicsEngine:
     """Test suite for PhysicsEngine class"""

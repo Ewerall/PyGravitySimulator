@@ -35,7 +35,7 @@ from gravity_simulator.physics import PhysicsEngine
 from gravity_simulator.objects import Object
 from gravity_simulator.ui import InputBox, draw_grid, find_object_under_mouse
 from gravity_simulator.config import (SCREEN_WIDTH, SCREEN_HEIGHT, DEFAULT_MASS,
-                    DEFAULT_RADIUS, GRID_SIZE, GRID_COLOR)
+                                      DEFAULT_RADIUS, GRID_SIZE, GRID_COLOR)
 from gravity_simulator.utils import random_color, safe_float_convert
 
 pygame.init()
@@ -153,7 +153,7 @@ while running:
             if event.button == 1:  # left button
                 if not mass_input.is_hovered(event.pos) and not radius_input.is_hovered(event.pos):
                     create_object(mouse_x, mouse_y)
-        
+
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_DELETE:
                 if hovered_object:
