@@ -9,15 +9,14 @@
 ##  Структура проекта
 ```
 PyGravitySimulator
-├── tests/            # тесты 
-├── resources/        # ресурсы проекта 
-├── main.py           # точка входа
-├── objects.py        # класс Object (физические объекты)
-├── physics.py        # физический движок
-├── config.py         # конфигурационные константы (размеры экрана и т.д)
-├── ui.py             # пользовательский интерфейс (поля ввода, сетка)
-├── utils.py          # утилиты и вспомогательные функции (цвета, конвертация)
-└── README.md         # этот файл
+├── .github/            # Workflows (CI)
+├── tests/              # Тесты (Unit, UI)   
+├── resources/          # Ресурсы проекта (Иконки, Текстуры etc.)
+├── gravity_simulator/  # Основной python пакет
+├── .flake8             # Настройки flake8
+├── .pylintrc           # Настройки pylint
+├── README.md           # Английская версия этого файла
+└── readme.ru.md        # Этот файл
 ```
 
 ### Установка и запуск
@@ -25,7 +24,7 @@ PyGravitySimulator
 ```bash
 pip install pygame
 git clone https://github.com/Ewerall/PyGravitySimulator.git
-python main.py
+python -m gravity_simulator.main
 ```
 
 ## Математика

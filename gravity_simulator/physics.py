@@ -12,9 +12,6 @@ Key physics concepts:
 
 The engine follows standard N-body simulation practices while optimizing for
 real-time visualization in a 2D space.
-
-Note: Screen dimensions are currently hardcoded but should be made configurable
-in future versions for better flexibility.
 """
 
 import math
@@ -63,6 +60,11 @@ class PhysicsEngine:
         self.dt = dt
         self.softening = 0.1  # Softening parameter to prevent infinite forces
 
+    def remove_particle(self, particle):
+        """Remove a particle from the simulation."""
+        if particle in self.particles:
+            self.particles.remove(particle)
+
     def add_particle(self, particle):
         """Add a celestial body to the simulation
 
@@ -86,8 +88,6 @@ class PhysicsEngine:
             • r_vec: Distance vector between particles
             • r: Euclidean distance
             • ε: Softening parameter (0.1 by default)
-
-        Note: This method modifies the fx, fy attributes of particles.
         """
         # Reset forces for all particles
         for p in self.particles:
@@ -136,8 +136,7 @@ class PhysicsEngine:
         5. Update motion trails for visualization
         6. Process particle collisions and merging
 
-        Note: Screen dimensions are hardcoded (1280x720) and should be made
-        configurable in future versions.
+        Note: Screen dimensions are hardcoded (1280x720)
         """
         self.calculate_forces()
 
@@ -197,9 +196,6 @@ class PhysicsEngine:
         1. Creates a list of active particles
         2. Checks all unique pairs for overlap
         3. Processes valid collisions through merge_particles()
-
-        Note: This method does not modify particle positions during detection
-        to avoid chain reactions in a single time step.
         """
         # Create list of active particles
         active_particles = [p for p in self.particles if p.active]
@@ -241,9 +237,6 @@ class PhysicsEngine:
         Args:
             p1: First particle (will absorb p2)
             p2: Second particle (will be deactivated)
-
-        Note: p2 is deactivated rather than removed to maintain stable
-        particle indexing during simulation.
         """
         if not p1.active or not p2.active:
             return

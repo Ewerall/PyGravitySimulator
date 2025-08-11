@@ -21,21 +21,21 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install flake8 pylint
+          pip install flake8 pylint pytest
 
       - name: Run flake8
         run: |
           if [ -f .flake8 ]; then
-            flake8 --config=.flake8 .
+            flake8 --config=.flake8 gravity_simulator/
           else
-            flake8 .
+            flake8 gravity_simulator/
           fi
 
       - name: Run pylint
         run: |
-          python_files=$(git ls-files '*.py')
+          python_files=$(git ls-files 'gravity_simulator/*.py')
           if [ -z "$python_files" ]; then
-            echo "No Python files found"
+            echo "No Python files found in gravity_simulator/"
             exit 0
           fi
           
@@ -51,4 +51,12 @@ jobs:
             fi
           else
             echo "Warning: Could not extract pylint score"
+          fi
+
+      - name: Run pytest
+        run: |
+          if [ -d "tests" ]; then
+            python -m pytest tests/ -v
+          else
+            echo "Tests directory not found, skipping pytest"
           fi

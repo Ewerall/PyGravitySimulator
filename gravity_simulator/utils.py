@@ -1,37 +1,16 @@
-"""Utility functions for gravitational physics simulation
+"""Utility functions
 
 This module provides essential helper functions for:
 - Generating visual elements (colors)
 - Safe conversion of user input to physical parameters
 - Data validation for physics simulation
-
-These utilities bridge the gap between UI components and physical models,
-ensuring robust handling of user input and visual representation of celestial bodies.
-
-Note: All functions are designed to be physics-aware with appropriate
-bounds checking and error handling.
 """
 
 import random
 
 
 def random_color():
-    """Generate a visually distinct RGB color for celestial bodies
-    
-    Returns a random color tuple with values starting from 50 to ensure
-    sufficient brightness for visibility against dark background.
-    
-    The color generation avoids:
-    - Very dark colors (which would blend with space background)
-    - Pure black/white (for better visual distinction)
-    
-    Returns:
-        tuple: RGB color values (r, g, b) where each is between 50-255
-        
-    Physics relevance:
-        Used to visually differentiate celestial bodies in the simulation
-        while maintaining good contrast against the space-like background.
-    """
+    """Generate a visually distinct RGB color for celestial objects"""
     return (random.randint(50, 255),
             random.randint(50, 255),
             random.randint(50, 255))
@@ -56,10 +35,6 @@ def safe_float_convert(text, default, min_val, max_val):
         10.0
         >>> safe_float_convert("5000", 10, 1, 1000)
         1000.0
-    
-    Physics relevance:
-        Critical for converting user input (mass, radius) to valid physical
-        parameters with appropriate bounds checking to prevent simulation instability.
     """
     try:
         value = float(text) if text else default

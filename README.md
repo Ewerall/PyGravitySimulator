@@ -11,15 +11,14 @@ This is an interactive 2D simulation of gravitational interaction between object
 ## Project structure
 ```
 PyGravitySimulator
-├── tests/            # Tests
-├── resources/        # Project resources
-├── main.py           # Entry point
-├── objects.py        # Object class (physical entities)
-├── physics.py        # Physics engine
-├── config.py         # Configuration constants (screen dimensions, etc.)
-├── ui.py             # User interface (input fields, grid)
-├── utils.py          # Utilities and helper functions (colors, conversions)
-└── README.md         # This file
+├── .github/            # Workflows (CI)
+├── tests/              # Tests (Unit, UI)   
+├── resources/          # Resourses (Icons, Textures etc.)
+├── gravity_simulator/  # Main py package
+├── .flake8             # Settings for flake8
+├── .pylintrc           # Settings for pylint
+├── README.md           # This file
+└── readme.ru.md        # Ru-version for this file
 ```
 
 ### Installation and Launch
@@ -27,7 +26,7 @@ PyGravitySimulator
 ```bash
 pip install pygame
 git clone https://github.com/Ewerall/PyGravitySimulator.git
-python main.py
+python -m gravity_simulator.main
 ```
 
 ## Mathematics

@@ -13,7 +13,7 @@ Note: Forces (fx, fy) are calculated dynamically during simulation and not store
 """
 
 import uuid
-from utils import random_color
+from gravity_simulator.utils import random_color
 
 
 class Object():
