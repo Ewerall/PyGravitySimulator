@@ -149,32 +149,33 @@ class TestPhysicsEngine:
         assert p1.x > initial_p1_x  # p1 should move right
         assert p2.x < initial_p2_x  # p2 should move left
 
-    def test_boundary_collision_left(self, engine: PhysicsEngine) -> None:
-        """Test left boundary collision handling"""
-        particle = MockParticle(x=0.5, y=100, vx=-1, vy=0, mass=1, radius=1)
-        engine.add_particle(particle)
+    #No more bounce!
+    #Need more tests
 
-        engine.update()
+    #def test_boundary_collision_left(self, engine: PhysicsEngine) -> None:
+        #particle = MockParticle(x=0.5, y=100, vx=-1, vy=0, mass=1, radius=1)
+        #engine.add_particle(particle)
 
-        assert particle.x == 1
-        assert particle.vx > 0
-        assert particle.vx == pytest.approx(1 * 0.8)  # type: ignore
+        #engine.update()
 
-    @pytest.mark.parametrize("initial_x,expected_x,initial_vx,expected_vx", [
-        (0.5, 1, -1, 0.8),
-        (1279.5, 1279, 1, -0.8),
-    ])
-    def test_boundary_collision_horizontal(self, engine: PhysicsEngine, initial_x: float,
-                                           expected_x: float, initial_vx: float,
-                                           expected_vx: float) -> None:
-        """Test horizontal boundary collision handling"""
-        particle = MockParticle(x=initial_x, y=100, vx=initial_vx, vy=0, mass=1, radius=1)
-        engine.add_particle(particle)
+        #assert particle.x == 1
+        #assert particle.vx > 0
+        #assert particle.vx == pytest.approx(1 * 0.8)  # type: ignore
 
-        engine.update()
+    #@pytest.mark.parametrize("initial_x,expected_x,initial_vx,expected_vx", [
+        #(0.5, 1, -1, 0.8),
+        #(1279.5, 1279, 1, -0.8),
+    #])
+    #def test_boundary_collision_horizontal(self, engine: PhysicsEngine, initial_x: float,
+                                           #expected_x: float, initial_vx: float,
+                                           #expected_vx: float) -> None:
+        #particle = MockParticle(x=initial_x, y=100, vx=initial_vx, vy=0, mass=1, radius=1)
+        #engine.add_particle(particle)
 
-        assert particle.x == expected_x
-        assert particle.vx == pytest.approx(expected_vx)  # type: ignore
+        #engine.update()
+
+        #assert particle.x == expected_x
+        #assert particle.vx == pytest.approx(expected_vx)  # type: ignore
 
     def test_merge_particles_conservation_of_momentum(self, engine: PhysicsEngine) -> None:
         """Test momentum conservation during particle merging"""
