@@ -65,14 +65,14 @@ class TestPhysicsEngine:
         p1 = MockParticle(x=0, y=0, mass=1)
         p2 = MockParticle(x=1, y=0, mass=1)
 
-        fx, fy = engine.calculate_force_between_particles(p1, p2)
+        fx, fy = engine.calc_force_beetween_particle(p1, p2)
 
         # Particles should attract each other
         assert fx > 0  # p1 should be pulled towards p2 (positive x direction)
         assert fy == 0  # Same y coordinate, no y force
 
         # Newton's third law: forces should be equal and opposite
-        fx2, fy2 = engine.calculate_force_between_particles(p2, p1)
+        fx2, fy2 = engine.calc_force_beetween_particle(p2, p1)
         assert fx == -fx2
         assert fy == -fy2
 
@@ -86,7 +86,7 @@ class TestPhysicsEngine:
         engine.add_particle(p2)
         engine.add_particle(p3)
 
-        fx_total, fy_total = engine.calculate_total_force_on_particle(p1)
+        fx_total, fy_total = engine.calculate_total_force_for_particle(p1)
 
         # Should have forces from both p2 and p3
         assert fx_total != 0
@@ -103,7 +103,7 @@ class TestPhysicsEngine:
         p1 = MockParticle(x=x1, y=y1, mass=1)
         p2 = MockParticle(x=x2, y=y2, mass=1)
 
-        fx, fy = engine.calculate_force_between_particles(p1, p2) # type: ignore
+        fx, fy = engine.calc_force_beetween_particle(p1, p2)  # type: ignore
 
         # Check force direction
         assert fx * expected_fx_sign > 0
@@ -125,8 +125,8 @@ class TestPhysicsEngine:
         engine.update()
 
         # With no other particles, no forces should act, so velocity stays constant
-        assert particle.x == pytest.approx(initial_x + initial_vx * engine.dt) # type: ignore
-        assert particle.y == pytest.approx(initial_y + initial_vy * engine.dt) # type: ignore
+        assert particle.x == pytest.approx(initial_x + initial_vx * engine.dt)  # type: ignore
+        assert particle.y == pytest.approx(initial_y + initial_vy * engine.dt)  # type: ignore
         assert particle.vx == initial_vx
         assert particle.vy == initial_vy
 
@@ -158,15 +158,15 @@ class TestPhysicsEngine:
 
         assert particle.x == 1
         assert particle.vx > 0
-        assert particle.vx == pytest.approx(1 * 0.8) # type: ignore
+        assert particle.vx == pytest.approx(1 * 0.8)  # type: ignore
 
     @pytest.mark.parametrize("initial_x,expected_x,initial_vx,expected_vx", [
         (0.5, 1, -1, 0.8),
         (1279.5, 1279, 1, -0.8),
     ])
     def test_boundary_collision_horizontal(self, engine: PhysicsEngine, initial_x: float,
-                                            expected_x: float, initial_vx: float,
-                                            expected_vx: float) -> None:
+                                           expected_x: float, initial_vx: float,
+                                           expected_vx: float) -> None:
         """Test horizontal boundary collision handling"""
         particle = MockParticle(x=initial_x, y=100, vx=initial_vx, vy=0, mass=1, radius=1)
         engine.add_particle(particle)
@@ -174,7 +174,7 @@ class TestPhysicsEngine:
         engine.update()
 
         assert particle.x == expected_x
-        assert particle.vx == pytest.approx(expected_vx) # type: ignore
+        assert particle.vx == pytest.approx(expected_vx)  # type: ignore
 
     def test_merge_particles_conservation_of_momentum(self, engine: PhysicsEngine) -> None:
         """Test momentum conservation during particle merging"""
@@ -186,14 +186,14 @@ class TestPhysicsEngine:
         initial_momentum_x = p1.mass * p1.vx + p2.mass * p2.vx
         initial_momentum_y = p1.mass * p1.vy + p2.mass * p2.vy
 
-        engine.handle_collisions()
+        engine.handle_collision()
 
         active_particle = p1 if p1.active else p2
         final_momentum_x = active_particle.mass * active_particle.vx
         final_momentum_y = active_particle.mass * active_particle.vy
 
-        assert final_momentum_x == pytest.approx(initial_momentum_x, rel=1e-10) # type: ignore
-        assert final_momentum_y == pytest.approx(initial_momentum_y, rel=1e-10) # type: ignore
+        assert final_momentum_x == pytest.approx(initial_momentum_x, rel=1e-10)  # type: ignore
+        assert final_momentum_y == pytest.approx(initial_momentum_y, rel=1e-10)  # type: ignore
 
     def test_inactive_particle_not_processed(self, engine: PhysicsEngine) -> None:
         """Test that inactive particles are not processed"""
@@ -208,7 +208,7 @@ class TestPhysicsEngine:
         assert active_particle.active is True
         assert inactive_particle.active is False
 
-        engine.handle_collisions()
+        engine.handle_collision()
 
         # After collision handling, inactive particle should remain inactive
         # and not affect the active one

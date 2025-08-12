@@ -22,12 +22,6 @@ from gravity_simulator.utils import random_color
 class Object():
     """Represents a celestial body in 2D gravitational simulation
     
-    Physics model:
-        Position: (x, y) in screen coordinates (pixels)
-        Velocity: (vx, vy) in pixels/second
-        Mass: Arbitrary units affecting gravitational force (F = G·m₁·m₂/r²)
-        Radius: Visual size (does not affect physics)
-    
     Attributes:
         x, y: Current position
         vx, vy: Current velocity components
@@ -36,8 +30,6 @@ class Object():
         color: RGB tuple for rendering
         active: Whether the body is participating in simulation
         id: Unique identifier (UUID)
-    
-    Note: Forces are calculated dynamically during physics updates
     """
     def __init__(self, x: float, y: float, mass: float, radius: float, **kwargs: Any) -> None:
         self.x: float = x
